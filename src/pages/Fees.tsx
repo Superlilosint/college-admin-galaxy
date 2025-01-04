@@ -17,12 +17,14 @@ import {
 } from "@/components/ui/select";
 import { DashboardCard } from "@/components/DashboardCard";
 import { CreditCard, DollarSign, Receipt, Wallet } from "lucide-react";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/AppSidebar";
 
 export default function Fees() {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-secondary">
+        <AppSidebar />
         <main className="flex-1 p-8">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between mb-8">
@@ -32,7 +34,6 @@ export default function Fees() {
                   Manage student fees and payments
                 </p>
               </div>
-              <SidebarTrigger />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
