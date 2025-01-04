@@ -15,6 +15,7 @@ import {
   Calendar,
   Settings,
   BarChart3,
+  Receipt,
 } from "lucide-react";
 
 const menuItems = [
@@ -42,6 +43,11 @@ const menuItems = [
     title: "Schedule",
     icon: Calendar,
     url: "/schedule",
+  },
+  {
+    title: "Fees",
+    icon: Receipt,
+    url: "/fees",
   },
   {
     title: "Settings",

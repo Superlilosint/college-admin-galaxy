@@ -8,6 +8,8 @@ import Students from "./pages/Students";
 import Faculty from "./pages/Faculty";
 import Courses from "./pages/Courses";
 import Schedule from "./pages/Schedule";
+import Fees from "./pages/Fees";
+import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +25,8 @@ const App = () => (
           <Route path="/faculty" element={<Faculty />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/schedule" element={<Schedule />} />
+          <Route path="/fees" element={<Fees />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
