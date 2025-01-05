@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GraduationCap, Users, BookOpen, Search } from "lucide-react";
+import { GraduationCap, Users, BookOpen, Search, Mail } from "lucide-react";
 import { DashboardCard } from "@/components/DashboardCard";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
