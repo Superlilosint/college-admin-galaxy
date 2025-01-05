@@ -1,14 +1,23 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { DashboardCard } from "@/components/DashboardCard";
+import { useNavigate } from "react-router-dom";
 import {
   Users,
   GraduationCap,
   BookOpen,
   Calendar,
 } from "lucide-react";
+import { toast } from "sonner";
 
 const Index = () => {
+  const navigate = useNavigate();
+
+  const handleQuickAction = (path: string, action: string) => {
+    toast.success(`Navigating to ${action}`);
+    navigate(path);
+  };
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-secondary">
@@ -84,22 +93,27 @@ const Index = () => {
                     {
                       title: "Add Student",
                       icon: <Users className="w-5 h-5" />,
+                      path: "/students",
                     },
                     {
                       title: "Add Faculty",
                       icon: <GraduationCap className="w-5 h-5" />,
+                      path: "/faculty",
                     },
                     {
                       title: "Create Course",
                       icon: <BookOpen className="w-5 h-5" />,
+                      path: "/courses",
                     },
                     {
                       title: "Schedule Event",
                       icon: <Calendar className="w-5 h-5" />,
+                      path: "/schedule",
                     },
                   ].map((action) => (
                     <button
                       key={action.title}
+                      onClick={() => handleQuickAction(action.path, action.title)}
                       className="p-4 rounded-lg bg-secondary hover:bg-primary-light transition-colors flex flex-col items-center gap-2 animate-fadeIn"
                     >
                       <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
