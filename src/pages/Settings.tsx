@@ -16,13 +16,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/AppSidebar";
 import { Bell, Mail, Shield, User } from "lucide-react";
 
 export default function Settings() {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-secondary">
+        <AppSidebar />
         <main className="flex-1 p-8">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-8">
@@ -32,7 +34,6 @@ export default function Settings() {
                   Manage your account settings and preferences
                 </p>
               </div>
-              <SidebarTrigger />
             </div>
 
             <div className="space-y-6">
