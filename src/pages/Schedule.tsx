@@ -3,8 +3,14 @@ import { DashboardCard } from "@/components/DashboardCard";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const Schedule = () => {
+  const handleAddEvent = () => {
+    toast.success("Opening event creation dialog");
+    // Event creation dialog will be implemented in the next iteration
+  };
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-secondary">
@@ -18,7 +24,7 @@ const Schedule = () => {
                   Manage classes and events schedule
                 </p>
               </div>
-              <Button>
+              <Button onClick={handleAddEvent}>
                 <Calendar className="w-4 h-4 mr-2" />
                 Add Event
               </Button>
@@ -46,7 +52,23 @@ const Schedule = () => {
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
               <h2 className="text-lg font-semibold mb-4">Upcoming Classes</h2>
               <div className="space-y-4">
-                {[1, 2, 3].map((i) => (
+                {[
+                  {
+                    title: "Advanced Mathematics",
+                    room: "101",
+                    time: "9:00 AM - 10:30 AM",
+                  },
+                  {
+                    title: "Computer Science",
+                    room: "203",
+                    time: "11:00 AM - 12:30 PM",
+                  },
+                  {
+                    title: "Physics Lab",
+                    room: "302",
+                    time: "2:00 PM - 3:30 PM",
+                  },
+                ].map((classItem, i) => (
                   <div
                     key={i}
                     className="flex items-center justify-between p-4 rounded-lg bg-secondary animate-fadeIn hover:bg-primary-light transition-colors"
@@ -59,9 +81,9 @@ const Schedule = () => {
                         <Clock className="w-5 h-5 text-primary" />
                       </div>
                       <div>
-                        <p className="font-medium">Advanced Mathematics</p>
+                        <p className="font-medium">{classItem.title}</p>
                         <p className="text-sm text-muted-foreground">
-                          Room 101 • 9:00 AM - 10:30 AM
+                          Room {classItem.room} • {classItem.time}
                         </p>
                       </div>
                     </div>
