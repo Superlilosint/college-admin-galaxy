@@ -6,9 +6,17 @@ import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { AddEventDialog } from "@/components/schedule/AddEventDialog";
 import { useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const Schedule = () => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
+  const [selectedEvent, setSelectedEvent] = useState<any>(null);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+  const handleViewDetails = (event: any) => {
+    setSelectedEvent(event);
+    setIsDetailsOpen(true);
+  };
 
   return (
     <SidebarProvider>
@@ -64,16 +72,22 @@ const Schedule = () => {
                       title: "Advanced Mathematics",
                       room: "101",
                       time: "9:00 AM - 10:30 AM",
+                      description: "Advanced calculus and linear algebra topics",
+                      instructor: "Dr. Smith"
                     },
                     {
                       title: "Computer Science",
                       room: "203",
                       time: "11:00 AM - 12:30 PM",
+                      description: "Introduction to algorithms and data structures",
+                      instructor: "Prof. Johnson"
                     },
                     {
                       title: "Physics Lab",
                       room: "302",
                       time: "2:00 PM - 3:30 PM",
+                      description: "Practical experiments in mechanics",
+                      instructor: "Dr. Brown"
                     },
                   ].map((classItem, i) => (
                     <div
@@ -95,7 +109,11 @@ const Schedule = () => {
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <Button variant="outline" size="sm">
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          onClick={() => handleViewDetails(classItem)}
+                        >
                           View Details
                         </Button>
                       </div>
@@ -107,6 +125,32 @@ const Schedule = () => {
           </div>
         </main>
       </div>
+
+      <Dialog open={isDetailsOpen} onOpenChange={setIsDetailsOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{selectedEvent?.title}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <Label>Time</Label>
+              <p className="text-sm text-muted-foreground">{selectedEvent?.time}</p>
+            </div>
+            <div>
+              <Label>Room</Label>
+              <p className="text-sm text-muted-foreground">Room {selectedEvent?.room}</p>
+            </div>
+            <div>
+              <Label>Instructor</Label>
+              <p className="text-sm text-muted-foreground">{selectedEvent?.instructor}</p>
+            </div>
+            <div>
+              <Label>Description</Label>
+              <p className="text-sm text-muted-foreground">{selectedEvent?.description}</p>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </SidebarProvider>
   );
 };

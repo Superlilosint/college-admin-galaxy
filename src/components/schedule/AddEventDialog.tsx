@@ -18,15 +18,26 @@ export function AddEventDialog() {
   const [room, setRoom] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Here you would typically save the event to your backend
     toast.success("Event created successfully!");
+    setIsOpen(false);
+    // Reset form
+    setTitle("");
+    setRoom("");
+    setStartTime("");
+    setEndTime("");
+    setDate(new Date());
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+        <Button>Add Event</Button>
+      </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Add New Event</DialogTitle>
@@ -39,6 +50,7 @@ export function AddEventDialog() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter event title"
+              required
             />
           </div>
           <div className="space-y-2">
@@ -48,6 +60,7 @@ export function AddEventDialog() {
               selected={date}
               onSelect={setDate}
               className="rounded-md border"
+              required
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -58,6 +71,7 @@ export function AddEventDialog() {
                 type="time"
                 value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
+                required
               />
             </div>
             <div className="space-y-2">
@@ -67,6 +81,7 @@ export function AddEventDialog() {
                 type="time"
                 value={endTime}
                 onChange={(e) => setEndTime(e.target.value)}
+                required
               />
             </div>
           </div>
@@ -77,6 +92,7 @@ export function AddEventDialog() {
               value={room}
               onChange={(e) => setRoom(e.target.value)}
               placeholder="Enter room number"
+              required
             />
           </div>
           <Button type="submit" className="w-full">
