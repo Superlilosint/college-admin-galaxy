@@ -4,18 +4,20 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 
 interface CourseFormFieldsProps {
-  onSubmit: () => void;
-  initialData?: {
-    courseCode: string;
-    courseName: string;
-    credits: string;
-    instructor: string;
-    capacity: string;
-  };
+  onSubmit: (data: CourseData) => void;
+  initialData?: CourseData;
+}
+
+interface CourseData {
+  courseCode: string;
+  courseName: string;
+  credits: string;
+  instructor: string;
+  capacity: string;
 }
 
 export function CourseFormFields({ onSubmit, initialData }: CourseFormFieldsProps) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<CourseData>({
     courseCode: initialData?.courseCode || "",
     courseName: initialData?.courseName || "",
     credits: initialData?.credits || "",
@@ -25,7 +27,7 @@ export function CourseFormFields({ onSubmit, initialData }: CourseFormFieldsProp
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit();
+    onSubmit(formData);
   };
 
   return (

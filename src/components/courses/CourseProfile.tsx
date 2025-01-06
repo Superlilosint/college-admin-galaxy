@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { CourseFormFields } from "./CourseFormFields";
 import { toast } from "sonner";
+import { useState } from "react";
 
 interface CourseProfileProps {
   course: {
@@ -20,13 +21,18 @@ interface CourseProfileProps {
 }
 
 export function CourseProfile({ course }: CourseProfileProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentCourse, setCurrentCourse] = useState(course);
+
   const handleEdit = () => {
-    // TODO: Implement edit logic
+    // In a real application, this would make an API call to update the course
+    setCurrentCourse(currentCourse);
+    setIsOpen(false);
     toast.success("Course updated successfully!");
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" size="sm">
           View Details
@@ -36,7 +42,9 @@ export function CourseProfile({ course }: CourseProfileProps) {
         <DialogHeader>
           <DialogTitle>Course Details</DialogTitle>
         </DialogHeader>
-        <CourseFormFields onSubmit={handleEdit} initialData={course} />
+        <div className="space-y-4">
+          <CourseFormFields onSubmit={handleEdit} initialData={currentCourse} />
+        </div>
       </DialogContent>
     </Dialog>
   );
